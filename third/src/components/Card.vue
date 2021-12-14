@@ -30,7 +30,7 @@ const onClickDelete = function() {
     emits("delete", props.card);
   }
 const onClickEdit = function() {
-    console.log("this is delete");
+    console.log("this is edit");
     emits("edit", props.card);
   }
 
