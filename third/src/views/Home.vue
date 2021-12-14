@@ -5,14 +5,19 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import { defineComponent , onMounted , onUpdated, onUnmounted } from "vue";
 import HelloWorld from "../components/HelloWorld.vue"; // @ is an alias to /src
 
-export default defineComponent({
-  name: "Home",
-  components: {
-    HelloWorld,
-  },
+let name = "Home";
+onMounted(() => {
+  console.log("mounted");
 });
+onUpdated(() => {
+  console.log("updated");
+});
+onUnmounted(() => {
+  console.log("unmounted");
+});
+
 </script>

@@ -32,6 +32,11 @@
   },
   "eslintConfig": {
     "root": true,
+    "globals": {
+      "defineProps": "readonly",
+      "defineEmits": "readonly",
+      "withDefaults": "readonly"
+    },
     "env": {
       "node": true
     },

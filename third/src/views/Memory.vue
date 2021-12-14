@@ -3,10 +3,10 @@
         <template #default>
         <div class="memory">
             <h1>This is the memory card game page</h1>
-            <memoryCard
+            <blegh
                 @delete="onClickDelete"
                 v-for="(cp, index) in cpArray" :key="index"
-                :card="cp"></memoryCard>
+                :card="cp"></blegh>
         </div>
         </template>
         <template #fallback>
@@ -16,35 +16,24 @@
 </template>
 
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from "vue";
 import axios from "axios";
-import memoryCard from "../components/Card.vue";
+import blegh from "../components/Card.vue";
 import { Card } from "../models/Card";
+import { ref } from "vue";
 
-export default defineComponent({
-    name: "Memory",
-    components: {
-        memoryCard,
-    },
-    data() {
-        return {
-            message: "This is dog",
-            cpArray: [] as Card[],
-            currentCard: new Card(0, 0, 0, 0),
-        };
-    },
-    created() {
-      axios
-      .get("https://my-json-server.typicode.com/cmmnct/patchDemo/patches")
-      .then((response) => (this.cpArray = response.data))
-      .catch(error => console.log(error));
-    },
-    methods: {
-        onClickDelete(card: Card) {
-            console.log(card);
-            this.cpArray.splice(this.cpArray.indexOf(card), 1);
-        }
-    }
-});
+let message = "This is dog";
+let cpArray = ref([] as Card[]);
+let currentCard = new Card(0, 0, 0, 0);
+
+function onClickDelete(card: Card) {
+    console.log(card);
+    cpArray.value.splice(cpArray.value.indexOf(card), 1);
+}
+axios
+    .get<Card[]>("https://my-json-server.typicode.com/cmmnct/patchDemo/patches")
+    .then((response) => (cpArray.value = response.data))
+    .catch(error => console.log(error));
+
 </script>
