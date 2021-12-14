@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="takeover"></div>
+    <div id="button1">
+        <div id="app1">
+            <button @click="onClick">Klik mij</button>
+            <teleport to="#takeover">
+                <div v-if="rawHtml">
+                    <div v-html="rawHtml"></div>
+                    <button @click="closeTakeover">Close</button>
+                </div>
+            </teleport>
+        </div>
+        <script async defer>
+            const Takeover1 = {
+               data() {
+                   return {
+                       name: 'Vince',
+                       rawHtml: ''
+                   }
+               },
+               methods: {
+                   onClick() {
+                       fetch('someHtml.html')
+                       .then(response => response.text())
+                       .then(data =>this.rawHtml = data)
+                   },
+                   closeTakeover() {
+                       this.rawHtml = '';
+                   }
+               }
+            }
+            Vue.createApp(Takeover1).mount('#app1');
+        </script>
+    </div>
+    <div id="button2">
+        <div id="app2">
+            <button @click="onClick">Klik mij</button>
+            <teleport to="#takeover">
+                <div v-if="rawHtml">
+                    <div v-html="rawHtml"></div>
+                    <button @click="closeTakeover">Close</button>
+                </div>
+            </teleport>
+        </div>
+        <script async defer>
+            const Takeover2 = {
+               data() {
+                   return {
+                       name: 'Domi',
+                       rawHtml: ''
+                   }
+               },
+               methods: {
+                   onClick() {
+                       fetch('someOtherHtml.html')
+                       .then(response => response.text())
+                       .then(data =>this.rawHtml = data)
+                   },
+                   closeTakeover() {
+                       this.rawHtml = '';
+                   }
+               }
+            }
+            Vue.createApp(Takeover2).mount('#app2');
+        </script>
+    </div>
+</body>
+</html>
